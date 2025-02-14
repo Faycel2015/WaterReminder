@@ -1,113 +1,158 @@
-Water Reminder App
-GitHub license
-SwiftUI
-iOS
+# Water Reminder App 🚰
+
+![App Logo](assets/images/app-logo.png)
 
 A SwiftUI-based iOS application designed to help users stay hydrated throughout the day. The app tracks water intake, sends customizable reminders, and provides visual feedback on hydration goals.
 
-Table of Contents
-Overview
-Features
-Screenshots
-Installation
-Usage
-Technologies Used
-Contributing
-License
-Overview
+[![Swift Version](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2018.0+-blue.svg)](https://developer.apple.com/ios/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
 The Water Reminder App is built using SwiftUI, Core Data, and the UserNotifications framework. It allows users to log their daily water intake, set personalized hydration goals, and configure reminders to ensure they stay hydrated. The app also includes statistics and achievements to motivate consistent usage.
 
-Features
-Hydration Tracking :
-Log water intake in different units (ml, oz, cups).
-Quick-add buttons for common amounts.
-Daily progress toward hydration goals.
-Personalized Goal Setting :
-Calculate recommended daily water intake based on weight, activity level, and climate.
-Manual adjustment of daily goals.
-Support for metric/imperial measurement systems.
-Reminder System :
-Configure customizable reminder schedules.
-Smart reminders based on user activity and previous intake.
-Notification styles with snooze/dismiss options.
-Visualization & Statistics :
-Daily/weekly/monthly consumption charts.
-Streak information and achievements.
-Insights into hydration habits.
-User Experience :
-Smooth animations for water logging.
-Engaging visual representation of water levels.
-Intuitive navigation and input methods.
-Screenshots
-Dashboard
-History
-Statistics
+## Features
 
-Replace placeholder images with actual screenshots of your app.
+### 💧 Hydration Tracking
+- Log water intake in different units (ml, oz, cups)
+- Quick-add buttons for common amounts
+- Daily progress toward hydration goals
 
-Installation
-To run the Water Reminder App locally, follow these steps:
+### 🎯 Personalized Goal Setting
+- Calculate recommended daily water intake based on weight, activity level, and climate
+- Manual adjustment of daily goals
+- Support for metric/imperial measurement systems
 
-Prerequisites
-Xcode 16.2 or later
-macOS 12.0 or later
-iOS 18.0 or later
-Steps
-Clone the Repository :
-bash
-Copy
-1
-2
-git clone [(https://github.com/Faycel2015/WaterReminder.git)]
+### ⏰ Reminder System
+- Configure customizable reminder schedules
+- Smart reminders based on user activity and previous intake
+- Notification styles with snooze/dismiss options
+
+### 📊 Visualization & Statistics
+- Daily/weekly/monthly consumption charts
+- Streak information and achievements
+- Insights into hydration habits
+
+### 🎨 User Experience
+- Smooth animations for water logging
+- Engaging visual representation of water levels
+- Intuitive navigation and input methods
+
+## Screenshots
+
+<div align="center">
+  <img src="assets/screenshots/dashboard.png" alt="Dashboard" width="250"/>
+  <img src="assets/screenshots/history.png" alt="History" width="250"/>
+  <img src="assets/screenshots/statistics.png" alt="Statistics" width="250"/>
+</div>
+
+## Installation
+
+### Prerequisites
+- Xcode 16.2 or later
+- macOS 12.0 or later
+- iOS 18.0 or later
+
+### Steps
+
+1. Clone the Repository
+```bash
+git clone https://github.com/Faycel2015/WaterReminderApp.git
 cd WaterReminderApp
-Open the Project :
-Open the .xcodeproj file in Xcode.
-Install Dependencies :
-If you're using Swift Package Manager, dependencies will be installed automatically.
-Run the App :
-Select a simulator or physical device from the Xcode toolbar.
-Click the "Run" button (Cmd + R) to launch the app.
-Usage
-Set Up Profile :
-Open the Settings tab and configure your weight, activity level, and climate.
-Adjust your daily hydration goal if needed.
-Log Water Intake :
-Use the Main Dashboard to log water consumption using quick-add buttons or manual entry.
-Configure Reminders :
-Go to the Reminder Configuration screen to set up personalized reminders.
-Customize times, messages, and frequencies.
-Track Progress :
-View your hydration progress on the Main Dashboard.
-Explore detailed statistics in the History and Statistics tabs.
-Technologies Used
-SwiftUI : For building the user interface.
-Core Data : For local data storage.
-UserNotifications Framework : For scheduling and managing reminders.
-Swift Concurrency : For asynchronous operations.
-HealthKit (Optional) : For integrating with Apple Health.
-Contributing
-We welcome contributions to improve the Water Reminder App! To contribute, follow these steps:
+```
 
-Fork the repository.
-Create a new branch for your feature or bug fix:
-bash
-Copy
-1
-git checkout -b feature/your-feature-name
-Make your changes and commit them:
-bash
-Copy
-1
-git commit -m "Add your feature description"
-Push your changes to your fork:
-bash
-Copy
-1
-git push origin feature/your-feature-name
-Submit a pull request to the main repository.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+2. Open the Project
+- Open `WaterReminderApp.xcodeproj` in Xcode
 
-Acknowledgments
-Special thanks to the SwiftUI and Core Data communities for providing valuable resources and examples.
-Inspiration for design and functionality came from popular health and wellness apps.
+3. Install Dependencies
+- Dependencies will be installed automatically via Swift Package Manager
+
+4. Run the App
+- Select your target device/simulator
+- Press `Cmd + R` or click the Run button
+
+## Usage
+
+### 1. Set Up Profile
+- Launch the app and complete the initial setup wizard
+- Configure your personal details:
+  - Weight
+  - Activity level
+  - Climate conditions
+  - Daily hydration goal
+
+### 2. Log Water Intake
+- Use the main dashboard quick-actions
+- Tap the "+" button for custom amounts
+- Swipe to edit or delete entries
+
+### 3. Configure Reminders
+- Navigate to Settings > Reminders
+- Set your preferred reminder schedule
+- Customize notification messages
+- Enable/disable smart reminders
+
+### 4. Track Progress
+- View daily progress on the main dashboard
+- Check detailed statistics in the History tab
+- Monitor achievements and streaks
+
+## Technologies Used
+
+- **SwiftUI**: Modern declarative UI framework
+- **Core Data**: Local data persistence
+- **UserNotifications**: iOS notification system
+- **Swift Concurrency**: Async/await pattern
+- **HealthKit** (Optional): Health data integration
+- **Charts**: Data visualization
+- **SwiftUI Animations**: Enhanced UX
+
+## Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch:
+```bash
+git checkout -b feature/amazing-feature
+```
+3. Commit your changes:
+```bash
+git commit -m 'Add some amazing feature'
+```
+4. Push to the branch:
+```bash
+git push origin feature/amazing-feature
+```
+5. Open a Pull Request
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- 🙏 SwiftUI and Core Data communities
+- 💡 Inspired by leading health and wellness apps
+- 🎨 Icons by [Icons8](https://icons8.com)
+- 📊 Charts powered by [Swift Charts](https://developer.apple.com/documentation/charts)
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/Faycel2015">Faycel2015</a>
+</div>

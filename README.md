@@ -1,4 +1,4 @@
-# Water Reminder App 🚰
+# Water Reminder App🚰
 
 ![App Logo](assets/images/app-logo.png)
 
@@ -69,12 +69,12 @@ The Water Reminder App is built using SwiftUI, Core Data, and the UserNotificati
 
 1. Clone the Repository
 ```bash
-git clone https://github.com/Faycel2015/WaterReminderApp.git
-cd WaterReminderApp
+git clone https://github.com/Faycel2015/WaterReminder.git
+cd WaterReminder
 ```
 
 2. Open the Project
-- Open `WaterReminderApp.xcodeproj` in Xcode
+- Open `WaterReminder.xcodeproj` in Xcode
 
 3. Install Dependencies
 - Dependencies will be installed automatically via Swift Package Manager

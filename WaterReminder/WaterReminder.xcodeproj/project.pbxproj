@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B89BC8A52D601C6500F5F50C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89BC8A42D601C6500F5F50C /* XCTest.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B89BC84E2D6003C600F5F50C /* WaterReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B89BC8A42D601C6500F5F50C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B89BC8A52D601C6500F5F50C /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				B89BC8502D6003C600F5F50C /* WaterReminder */,
+				B89BC8A32D601C6400F5F50C /* Frameworks */,
 				B89BC84F2D6003C600F5F50C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +50,14 @@
 				B89BC84E2D6003C600F5F50C /* WaterReminder.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B89BC8A32D601C6400F5F50C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B89BC8A42D601C6500F5F50C /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

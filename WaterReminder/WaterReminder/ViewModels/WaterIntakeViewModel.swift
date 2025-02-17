@@ -5,7 +5,6 @@
 //  Created by FayTek on 2/15/25.
 //
 
-import Foundation
 import SwiftUI
 import CoreData
 
@@ -15,12 +14,18 @@ class WaterIntakeViewModel: ObservableObject {
     @Published var progress: CGFloat = 0
     @Published var waterIntakes: [WaterIntake] = []
     @Published var selectedDate: Date = Date()
+    @Published var nextReminder: Date?
 
     private let context: NSManagedObjectContext
 
     init(context: NSManagedObjectContext) {
         self.context = context
         fetchWaterIntakes()
+    }
+    
+    func updateNextReminder() {
+        let futureReminders = waterIntakes.filter { $0.timestamp > Date() }
+        nextReminder = futureReminders.sorted(by: { $0.timestamp < $1.timestamp }).first?.timestamp
     }
 
     func fetchWaterIntakes() {

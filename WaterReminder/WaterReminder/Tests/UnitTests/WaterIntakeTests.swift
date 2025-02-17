@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import WaterReminder
 import CoreData
 
 class WaterIntakeTests: XCTestCase {

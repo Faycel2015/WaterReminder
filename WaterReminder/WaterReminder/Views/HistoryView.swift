@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HistoryView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel = WaterIntakeViewModel(context: viewContext)
-
+    @Environment(\ManagedObjectContext) private var viewContext
+    @StateObject private var viewModel: WaterIntakeViewModel
+    
+    init(context: NSManagedObjectContext) {
+        _viewModel = StateObject(wrappedValue: WaterIntakeViewModel(context: context))
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -23,13 +28,14 @@ struct HistoryView: View {
 }
 
 struct CalendarSection: View {
+    @State private var selectedDate = Date()
     let viewModel: WaterIntakeViewModel
-
+    
     var body: some View {
         Section(header: Text("Calendar")) {
-            DatePicker("Select Date", selection: $viewModel.selectedDate, displayedComponents: .date)
+            DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
                 .labelsHidden()
-            Text("Total Intake: \(viewModel.getDailyIntake(for: viewModel.selectedDate)) ml")
+            Text("Total Intake: \(viewModel.getDailyIntake(for: selectedDate)) ml")
                 .font(.headline)
         }
     }
@@ -37,17 +43,14 @@ struct CalendarSection: View {
 
 struct RecentIntakeSection: View {
     let viewModel: WaterIntakeViewModel
-
+    
     var body: some View {
         Section(header: Text("Recent Intake")) {
-            ForEach(viewModel.waterIntakes.reversed()) { intake in
+            ForEach(viewModel.waterIntakes.reversed(), id: \ .self) { intake in
                 HStack {
-                    Text(
-                        intake.timestamp
-                            .formatted(date: .numeric, time: .shortened)
-                    )
+                    Text(intake.timestamp?.formatted(date: .numeric, time: .shortened) ?? "")
                     Spacer()
-                    Text("\(intake.amount) \(intake.unit ?? "ml")")
+                    Text("\(intake.amount) \(intake.unit ?? \"ml\")")
                 }
             }
         }

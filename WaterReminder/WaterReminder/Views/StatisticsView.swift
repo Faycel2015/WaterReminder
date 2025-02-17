@@ -8,11 +8,16 @@
 import SwiftUI
 import SwiftData
 import Charts
+import CoreData
 
 struct StatisticsView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel = WaterIntakeViewModel(context: viewContext)
-
+    @Environment(\ManagedObjectContext) private var viewContext
+    @StateObject private var viewModel: WaterIntakeViewModel
+    
+    init(context: NSManagedObjectContext) {
+        _viewModel = StateObject(wrappedValue: WaterIntakeViewModel(context: context))
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -51,7 +56,7 @@ struct ChartSection: View {
             Text(title)
                 .font(.headline)
             Chart {
-                ForEach(data.enumerated(), id: \.offset) { index, value in
+                ForEach(Array(data.enumerated()), id: \.offset) { index, value in
                     BarMark(
                         x: .value("Day", index + 1),
                         y: .value("Intake", value)

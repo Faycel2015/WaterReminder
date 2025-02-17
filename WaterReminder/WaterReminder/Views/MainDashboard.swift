@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct MainDashboard: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel = WaterIntakeViewModel(context: viewContext)
-
+    @Environment(\ManagedObjectContext) private var viewContext
+    @StateObject private var viewModel: WaterIntakeViewModel
+    
+    init(context: NSManagedObjectContext) {
+        _viewModel = StateObject(wrappedValue: WaterIntakeViewModel(context: context))
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {

@@ -10,6 +10,7 @@ import SwiftUI
 struct ReminderConfigurationView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var viewModel = ReminderViewModel(context: PersistenceController.shared.container.viewContext)
+    @State private var showAddReminderSheet = false
 
     var body: some View {
         NavigationView {
@@ -18,31 +19,27 @@ struct ReminderConfigurationView: View {
                     ReminderRow(reminder: reminder, viewModel: viewModel)
                 }
                 .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        viewModel.deleteReminder(reminder: viewModel.reminders[index])
-                    }
+                    viewModel.deleteReminders(at: indexSet)
                 }
             }
             .navigationTitle("Reminders")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
+                    Button {
                         showAddReminderSheet = true
-                    }) {
+                    } label: {
                         Image(systemName: "plus")
                     }
                 }
             }
             .sheet(isPresented: $showAddReminderSheet) {
-                AddReminderView(viewModel: viewModel)
+                addReminder(viewModel: viewModel) // Ensure this view exists
             }
         }
         .onAppear {
             viewModel.requestAuthorization()
         }
     }
-
-    @State private var showAddReminderSheet = false
 }
 
 struct ReminderRow: View {
@@ -51,13 +48,14 @@ struct ReminderRow: View {
 
     var body: some View {
         HStack {
-            Text(
-                reminder.time.formatted(date: .omitted, time: .shortened) ?? ""
-            )
+            Text(reminder.time.formatted(date: .omitted, time: .shortened))
             Spacer()
-            Toggle(isOn: Binding(get: { reminder.isActive }, set: { newValue in
-                viewModel.toggleReminder(reminder: reminder)
-            })) {
+            Toggle(isOn: Binding(
+                get: { reminder.isActive },
+                set: { newValue in
+                    viewModel.toggleReminder(reminder: reminder)
+                }
+            )) {
                 EmptyView()
             }
             .labelsHidden()

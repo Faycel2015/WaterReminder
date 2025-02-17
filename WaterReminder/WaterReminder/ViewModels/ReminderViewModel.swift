@@ -10,22 +10,21 @@ import CoreData
 import UserNotifications
 
 class ReminderViewModel: ObservableObject {
-    @Published var reminders: [ReminderSettings] = []
-    private let context: NSManagedObjectContext
-
-    init(context: NSManagedObjectContext) {
-        self.context = context
-        fetchReminders()
-    }
-
-    func fetchReminders() {
-        let request: NSFetchRequest<ReminderSettings> = ReminderSettings.fetchRequest()
-        do {
-            reminders = try context.fetch(request)
-        } catch {
-            print("Error fetching reminders: \(error)")
+    let notificationCenter = UNUserNotificationCenter.current()
+    
+    func addReminder(time: Date, message: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "Water Reminder"
+        content.body = message
+        content.sound = .default
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: time), repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print("Error scheduling reminder: \(error)")
+            }
         }
     }
-
-    // Add, toggle, and delete reminders (as implemented in Phase 2).
 }

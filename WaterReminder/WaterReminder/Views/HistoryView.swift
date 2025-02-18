@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct HistoryView: View {
-    @Environment(\ManagedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var viewModel: WaterIntakeViewModel
     
     init(context: NSManagedObjectContext) {
@@ -20,7 +20,7 @@ struct HistoryView: View {
         NavigationView {
             List {
                 CalendarSection(viewModel: viewModel)
-                RecentIntakeSection(viewModel: viewModel)
+                RecentIntakeSection(viewModel: viewModel, selectedDate: Date())
             }
             .navigationTitle("History")
         }
@@ -42,15 +42,19 @@ struct CalendarSection: View {
 }
 
 struct RecentIntakeSection: View {
+    
     let viewModel: WaterIntakeViewModel
+    let selectedDate: Date
     
     var body: some View {
         Section(header: Text("Recent Intake")) {
             ForEach(viewModel.waterIntakes.reversed(), id: \ .self) { intake in
                 HStack {
-                    Text(intake.timestamp?.formatted(date: .numeric, time: .shortened) ?? "")
+                    Text(
+                        intake.timestamp
+                            .formatted(date: .numeric, time: .shortened))
                     Spacer()
-                    Text("\(intake.amount) \(intake.unit ?? \"ml\")")
+                    Text("Total Intake: \(viewModel.getDailyIntake(for: selectedDate)) ml")
                 }
             }
         }

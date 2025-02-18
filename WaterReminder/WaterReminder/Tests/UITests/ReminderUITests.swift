@@ -19,7 +19,7 @@ class ReminderUITests: XCTestCase {
 
         // Navigate to Reminder Configuration
         app.tabBars.buttons["Settings"].tap()
-        app.navigationLinks["Reminder Configuration"].tap()
+        app.staticTexts["Reminder Configuration"].tap()
 
         // Add a new reminder
         app.buttons["Add Reminder"].tap()
@@ -37,7 +37,7 @@ class ReminderUITests: XCTestCase {
 
         // Navigate to Reminder Configuration
         app.tabBars.buttons["Settings"].tap()
-        app.navigationLinks["Reminder Configuration"].tap()
+        app.staticTexts["Reminder Configuration"].tap()
 
         // Toggle an existing reminder
         app.tables.switches.element(boundBy: 0).tap()

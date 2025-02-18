@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 
 public class UserProfile: NSManagedObject {
+    @NSManaged public var name: String
+    @NSManaged public var height: Double
     @NSManaged public var weight: Double
     @NSManaged public var activityLevel: String
     @NSManaged public var climate: String

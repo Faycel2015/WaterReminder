@@ -31,10 +31,10 @@ struct AchievementsView: View {
 
     private func getAchievements() -> [String] {
         var achievements: [String] = []
-        if calculateStreak() >= 7 {
+        if viewModel.calculateStreak() >= 7 {
             achievements.append("7-Day Streak")
         }
-        if calculateStreak() >= 30 {
+        if viewModel.calculateStreak() >= 30 {
             achievements.append("30-Day Streak")
         }
         if viewModel.totalIntake >= 10000 {

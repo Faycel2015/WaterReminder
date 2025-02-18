@@ -11,7 +11,7 @@ import Charts
 import CoreData
 
 struct StatisticsView: View {
-    @Environment(\ManagedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var viewModel: WaterIntakeViewModel
     
     init(context: NSManagedObjectContext) {

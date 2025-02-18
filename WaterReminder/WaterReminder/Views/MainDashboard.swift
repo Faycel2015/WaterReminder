@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct MainDashboard: View {
-    @Environment(\ManagedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var viewModel: WaterIntakeViewModel
     
     init(context: NSManagedObjectContext) {
@@ -25,14 +25,13 @@ struct MainDashboard: View {
                 NextReminderView(viewModel: viewModel)
             }
             .padding()
-            .navigationTitle("Stay Hydrated")
+            .navigationTitle(LocalizedStringKey("stay_hydrated"))
         }
     }
 }
 
 struct LiquidProgressView: View {
     let progress: CGFloat
-
     var body: some View {
         ZStack {
             Circle()
@@ -42,7 +41,7 @@ struct LiquidProgressView: View {
                 .trim(from: 0, to: progress)
                 .stroke(Color.blue, style: StrokeStyle(lineWidth: 15, lineCap: .round))
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut, value: progress)
+                .animation(.easeInOut(duration: 0.5), value: progress)
                 .frame(width: 150, height: 150)
             Text("\(Int(progress * 100))%")
                 .font(.title)
@@ -53,10 +52,16 @@ struct LiquidProgressView: View {
 
 struct QuickAddButtons: View {
     let viewModel: WaterIntakeViewModel
-
+    let amounts: [Int]
+    
+    init(viewModel: WaterIntakeViewModel, amounts: [Int] = [250, 500, 750]) {
+        self.viewModel = viewModel
+        self.amounts = amounts
+    }
+    
     var body: some View {
         HStack {
-            ForEach([250, 500, 750], id: \.self) { amount in
+            ForEach(amounts, id: \.self) { amount in
                 Button(action: {
                     viewModel.addWater(amount: Double(amount), unit: "ml")
                 }) {
@@ -73,7 +78,6 @@ struct QuickAddButtons: View {
 
 struct TodaySummary: View {
     let viewModel: WaterIntakeViewModel
-
     var body: some View {
         VStack(alignment: .leading) {
             Text("Today's Intake")
@@ -86,7 +90,6 @@ struct TodaySummary: View {
 
 struct NextReminderView: View {
     let viewModel: WaterIntakeViewModel
-
     var body: some View {
         if let nextReminder = viewModel.nextReminder {
             Text("Next Reminder: \(nextReminder)")

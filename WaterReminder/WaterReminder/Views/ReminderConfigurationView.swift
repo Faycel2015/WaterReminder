@@ -9,8 +9,13 @@ import SwiftUI
 
 struct ReminderConfigurationView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel = ReminderViewModel(context: PersistenceController.shared.container.viewContext)
+    @StateObject private var viewModel: ReminderViewModel
     @State private var showAddReminderSheet = false
+    @State private var selectedReminder: ReminderSettings?
+
+    init(viewModel: ReminderViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationView {
@@ -26,6 +31,7 @@ struct ReminderConfigurationView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
+                        selectedReminder = nil
                         showAddReminderSheet = true
                     } label: {
                         Image(systemName: "plus")
@@ -33,7 +39,11 @@ struct ReminderConfigurationView: View {
                 }
             }
             .sheet(isPresented: $showAddReminderSheet) {
-                addReminder(viewModel: viewModel) // Ensure this view exists
+                if let selectedReminder = selectedReminder {
+                    ReminderRow(reminder: selectedReminder, viewModel: viewModel)
+                } else {
+                    Text("Add New Reminder") // Replace with your actual view for adding a new reminder
+                }
             }
         }
         .onAppear {
@@ -52,7 +62,7 @@ struct ReminderRow: View {
             Spacer()
             Toggle(isOn: Binding(
                 get: { reminder.isActive },
-                set: { newValue in
+                set: { _ in
                     viewModel.toggleReminder(reminder: reminder)
                 }
             )) {

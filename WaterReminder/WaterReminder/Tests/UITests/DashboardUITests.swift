@@ -24,7 +24,7 @@ class DashboardUITests: XCTestCase {
 
         // Test quick-add button
         app.buttons["250 ml"].tap()
-        XCTAssertTrue(app.staticTexts.contains("250 ml"))
+        XCTAssertTrue(app.staticTexts["250 ml"].exists)
     }
 
     func testNotificationPermissionRequest() throws {

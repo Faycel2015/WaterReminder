@@ -26,23 +26,33 @@ class ReminderTests: XCTestCase {
     
     func testScheduleReminder() throws {
         let now = Date()
-        viewModel.addReminder(time: now.addingTimeInterval(60), message: "Test Reminder")
+        _ = viewModel
+            .addReminder(
+                time: now.addingTimeInterval(60),
+                message: "Test Reminder"
+            )
         XCTAssertEqual(viewModel.reminders.count, 1)
         XCTAssertEqual(viewModel.reminders.first?.message, "Test Reminder")
     }
     
+    func testAddReminder() throws {
+        let now = Date()
+        let reminder = viewModel.addReminder(time: now.addingTimeInterval(60), message: "Test Reminder")
+        XCTAssertEqual(viewModel.reminders.count, 1)
+        XCTAssertEqual(reminder.message, "Test Reminder")
+    }
+
     func testCancelReminder() throws {
         let now = Date()
         let reminder = viewModel.addReminder(time: now.addingTimeInterval(60), message: "Test Reminder")
         viewModel.deleteReminder(reminder: reminder)
         XCTAssertTrue(viewModel.reminders.isEmpty)
     }
-    
+
     func testToggleReminder() throws {
         let now = Date()
         let reminder = viewModel.addReminder(time: now.addingTimeInterval(60), message: "Test Reminder")
         XCTAssertTrue(reminder.isActive)
-
         viewModel.toggleReminder(reminder: reminder)
         XCTAssertFalse(reminder.isActive)
     }

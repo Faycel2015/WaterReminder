@@ -2,27 +2,49 @@
 //  UserProfileViewModel.swift
 //  WaterReminder
 //
-//  Created by FayTek on 2/15/25.
+//  Created by FayTek on 2/24/25.
 //
 
-import Foundation
 import SwiftUI
-import CoreData
+import SwiftData
+import UserNotifications
+import AVFoundation
+import GameKit
+import SpriteKit
 
 class UserProfileViewModel: ObservableObject {
-    private let persistenceController: PersistenceController
+    @AppStorage("selectedAvatar") var selectedAvatar: AvatarType = .robot
+    @AppStorage("hydrationStreak") var hydrationStreak: Int = 0
+    @Published var showUnlockAnimation: Bool = false
+    @Published var showConfetti: Bool = false
+    private var audioPlayer: AVAudioPlayer?
     
-    init(persistenceController: PersistenceController) {
-        self.persistenceController = persistenceController
+    var availableAvatars: [AvatarType] {
+        return AvatarType.unlockableAvatars(for: hydrationStreak)
     }
     
-    func updateProfile(name: String, weight: Double, height: Double, dailyGoal: Double) {
-        let context = persistenceController.container.viewContext
-        let profile = UserProfile(context: context)
-        profile.name = name
-        profile.weight = weight
-        profile.height = height
-        profile.dailyGoal = dailyGoal
-        persistenceController.save()
+    func checkForNewUnlocks() {
+        if availableAvatars.contains(selectedAvatar) == false {
+            selectedAvatar = availableAvatars.last ?? .robot
+            showUnlockAnimation = true
+            if hydrationStreak >= 60 {
+                showConfetti = true
+                playConfettiSound()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.showConfetti = false
+                }
+            }
+        }
+    }
+    
+    func playConfettiSound() {
+        if let soundURL = Bundle.main.url(forResource: "confetti_sound", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.play()
+            } catch {
+                print("Error playing confetti sound: \(error.localizedDescription)")
+            }
+        }
     }
 }

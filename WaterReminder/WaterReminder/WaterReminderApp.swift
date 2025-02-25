@@ -6,15 +6,27 @@
 //
 
 import SwiftUI
+import SwiftData
+import UserNotifications
+import AVFoundation
+import GameKit
+import SpriteKit
 
 @main
 struct WaterReminderApp: App {
-    let persistenceController = PersistenceController.shared
-
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            DashboardView()
+                .preferredColorScheme(.automatic)
+                .environmentObject(WaterIntakeViewModel())
+                .environmentObject(ReminderViewModel())
+                .environmentObject(HistoryViewModel())
+                .environmentObject(UserProfileViewModel())
+                .environmentObject(WaterPetViewModel())
+                .environmentObject(HydrationChallengeViewModel())
+                .environmentObject(MultiplayerBattleViewModel())
         }
     }
 }

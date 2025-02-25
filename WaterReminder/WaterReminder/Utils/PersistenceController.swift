@@ -16,7 +16,7 @@ class PersistenceController {
         container = NSPersistentContainer(name: "WaterReminderModel")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Error loading persistent store: \(error), \(error.userInfo)")
             }
         }
     }
@@ -27,8 +27,7 @@ class PersistenceController {
             do {
                 try context.save()
             } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                print("Error saving Core Data: \(error.localizedDescription)")
             }
         }
     }

@@ -189,3 +189,9 @@ The app is designed for localization:
 ### 4. Widgets & Complications
 - Add Home Screen widgets for quick logging
 - Include Apple Watch complications and Live Activities
+
+## Quick Setup
+1. Clone the repository: `git clone <repo_url>`
+2. Open `WaterReminder.xcodeproj` in Xcode.
+3. Build and run the app (`Cmd + R`).
+4. Run tests using `Cmd + U`.

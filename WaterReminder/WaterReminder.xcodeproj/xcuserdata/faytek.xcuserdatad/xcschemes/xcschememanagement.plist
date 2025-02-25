@@ -6,8 +6,28 @@
 	<dict>
 		<key>WaterReminder.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B81C7AA72D6A805A008576DE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B86B98CC2D6D0E440021FF60</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B89BC84D2D6003C600F5F50C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

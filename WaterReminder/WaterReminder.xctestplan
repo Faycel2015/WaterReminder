@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "49E67EBB-5DB8-4694-85F1-E1DE96BC3943",
+      "name" : "Test Scheme Action",
+      "options" : {
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:WaterReminder.xcodeproj",
+          "identifier" : "B81C7AA72D6A805A008576DE",
+          "name" : "WaterReminderTests"
+        }
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:WaterReminder.xcodeproj",
+      "identifier" : "B89BC84D2D6003C600F5F50C",
+      "name" : "WaterReminder"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WaterReminder.xcodeproj",
+        "identifier" : "B81C7AA72D6A805A008576DE",
+        "name" : "WaterReminderTests"
+      }
+    }
+  ],
+  "version" : 1
+}

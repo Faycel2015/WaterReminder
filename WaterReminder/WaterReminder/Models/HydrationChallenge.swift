@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+import SwiftData
 
+@Model // ✅ Enable SwiftData persistence
 class HydrationChallenge {
     var id: UUID = UUID()
     var type: String // "Daily" or "Weekly"

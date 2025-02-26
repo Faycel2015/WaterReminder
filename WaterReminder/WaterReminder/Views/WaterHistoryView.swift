@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 import Charts
 
 struct WaterHistoryView: View {
-    @StateObject private var viewModel = WaterHistoryViewModel()
+    @State private var viewModel: WaterHistoryViewModel // ✅ Use @State instead of @StateObject
+    
+    init(context: ModelContext) {
+        self._viewModel = State(initialValue: WaterHistoryViewModel(context: context)) // ✅ Inject ModelContext
+    }
     
     var body: some View {
         VStack {
@@ -68,6 +72,6 @@ struct ChartData: Identifiable {
 
 struct WaterHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        WaterHistoryView()
+        WaterHistoryView(context: try! ModelContainer(for: WaterIntake.self).mainContext) // ✅ Inject ModelContext in preview
     }
 }

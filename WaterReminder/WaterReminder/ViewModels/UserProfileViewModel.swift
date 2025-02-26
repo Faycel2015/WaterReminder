@@ -13,6 +13,8 @@ import GameKit
 import SpriteKit
 
 class UserProfileViewModel: ObservableObject {
+    @Published var userProfile = UserProfile() // 👈 Fix: Add UserProfile instance
+    
     @AppStorage("selectedAvatar") var selectedAvatar: AvatarType = .robot
     @AppStorage("hydrationStreak") var hydrationStreak: Int = 0
     @Published var showUnlockAnimation: Bool = false
@@ -20,14 +22,14 @@ class UserProfileViewModel: ObservableObject {
     private var audioPlayer: AVAudioPlayer?
     
     var availableAvatars: [AvatarType] {
-        return AvatarType.unlockableAvatars(for: hydrationStreak)
+        return AvatarType.unlockableAvatars(for: userProfile.streak) // 👈 Fix: Use userProfile.streak
     }
     
     func checkForNewUnlocks() {
         if availableAvatars.contains(selectedAvatar) == false {
             selectedAvatar = availableAvatars.last ?? .robot
             showUnlockAnimation = true
-            if hydrationStreak >= 60 {
+            if userProfile.streak >= 60 { // 👈 Fix: Use userProfile.streak
                 showConfetti = true
                 playConfettiSound()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

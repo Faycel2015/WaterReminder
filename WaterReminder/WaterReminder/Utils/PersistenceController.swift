@@ -5,30 +5,28 @@
 //  Created by FayTek on 2/15/25.
 //
 
-import CoreData
+import SwiftUI
+import SwiftData
 
+@MainActor
 class PersistenceController {
     static let shared = PersistenceController()
     
-    let container: NSPersistentContainer
+    let container: ModelContainer
     
-    init() {
-        container = NSPersistentContainer(name: "WaterReminderModel")
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                print("Error loading persistent store: \(error), \(error.userInfo)")
-            }
+    private init() {
+        do {
+            container = try ModelContainer(for: WaterIntake.self)
+        } catch {
+            fatalError("Failed to initialize SwiftData ModelContainer: \(error)")
         }
     }
     
-    func save() {
-        let context = container.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                print("Error saving Core Data: \(error.localizedDescription)")
-            }
+    func save(context: ModelContext) {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving SwiftData: \(error.localizedDescription)")
         }
     }
 }

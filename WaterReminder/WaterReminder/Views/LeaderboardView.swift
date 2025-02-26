@@ -29,20 +29,35 @@ struct LeaderboardView: View {
             }
             .frame(height: 200)
             
-            Text("Daily Challenge: \(Int(challengeVM.dailyChallenge.progress))/\(Int(challengeVM.dailyChallenge.goal)) ml")
-                .font(.subheadline)
-                .padding()
-            ProgressView(value: challengeVM.dailyChallenge.progress, total: challengeVM.dailyChallenge.goal)
-                .progressViewStyle(LinearProgressViewStyle())
-                .padding()
+            // ✅ Safely unwrap dailyChallenge
+            if let daily = challengeVM.dailyChallenge {
+                Text("Daily Challenge: \(Int(daily.progress))/\(Int(daily.goal)) ml")
+                    .font(.subheadline)
+                    .padding()
+                ProgressView(value: daily.progress, total: daily.goal)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .padding()
+            } else {
+                Text("Daily Challenge: Loading...")
+                    .font(.subheadline)
+                    .padding()
+            }
             
-            Text("Weekly Challenge: \(Int(challengeVM.weeklyChallenge.progress))/\(Int(challengeVM.weeklyChallenge.goal)) ml")
-                .font(.subheadline)
-                .padding()
-            ProgressView(value: challengeVM.weeklyChallenge.progress, total: challengeVM.weeklyChallenge.goal)
-                .progressViewStyle(LinearProgressViewStyle())
-                .padding()
+            // ✅ Safely unwrap weeklyChallenge
+            if let weekly = challengeVM.weeklyChallenge {
+                Text("Weekly Challenge: \(Int(weekly.progress))/\(Int(weekly.goal)) ml")
+                    .font(.subheadline)
+                    .padding()
+                ProgressView(value: weekly.progress, total: weekly.goal)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .padding()
+            } else {
+                Text("Weekly Challenge: Loading...")
+                    .font(.subheadline)
+                    .padding()
+            }
         }
         .padding()
     }
 }
+

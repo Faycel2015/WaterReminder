@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WaterTrackerView: View {
-    @StateObject private var viewModel = WaterIntakeViewModel()
+    @State private var viewModel: WaterIntakeViewModel // ✅ No need for @StateObject
     
+    init(context: ModelContext) {
+        self._viewModel = State(initialValue: WaterIntakeViewModel(context: context)) // ✅ Inject context
+    }
+
     var body: some View {
         VStack {
             Text("Water Tracker")
@@ -56,13 +61,5 @@ struct CircularProgressView: View {
                 .rotationEffect(.degrees(-90))
                 .animation(.easeOut(duration: 1.0), value: progress)
         }
-    }
-}
-
-// MARK: - Preview
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        WaterTrackerView()
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import GameKit
 
 struct MultiplayerBattleView: View {
@@ -51,17 +52,15 @@ struct MultiplayerBattleView: View {
             
             HStack {
                 Button("Apply Penalty") {
-                    if let localPlayer = GKLocalPlayer.local.alias {
-                        battleVM.applyPenaltyToPlayer(player: localPlayer)
-                    }
+                    let localPlayer = GKLocalPlayer.local.alias // ✅ No optional needed
+                    battleVM.applyPenaltyToPlayer(player: localPlayer)
                 }
                 .buttonStyle(.bordered)
                 .padding()
                 
                 Button("Activate Power-Up") {
-                    if let localPlayer = GKLocalPlayer.local.alias {
-                        battleVM.activatePowerUpForPlayer(player: localPlayer)
-                    }
+                    let localPlayer = GKLocalPlayer.local.alias // ✅ No optional needed
+                    battleVM.activatePowerUpForPlayer(player: localPlayer)
                 }
                 .buttonStyle(.borderedProminent)
                 .padding()

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import GameKit
 
-class MultiplayerBattleViewModel: ObservableObject {
+class MultiplayerBattleViewModel: NSObject, ObservableObject { // 👈 Inherit NSObject
     @Published var battle = MultiplayerBattle()
     private var matchmakerVC: GKMatchmakerViewController?
     
@@ -30,6 +30,7 @@ class MultiplayerBattleViewModel: ObservableObject {
     }
 }
 
+// ✅ Conformance to GKMatchmakerViewControllerDelegate
 extension MultiplayerBattleViewModel: GKMatchmakerViewControllerDelegate {
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
         viewController.dismiss(animated: true)

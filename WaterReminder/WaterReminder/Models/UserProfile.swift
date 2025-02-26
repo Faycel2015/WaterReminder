@@ -8,17 +8,17 @@
 import SwiftUI
 import AVFoundation
 
-class UserProfile {
-    var dailyGoal: Double = 2000.0
-    var measurementUnit: String = "ml"
-    var xp: Int = 0
-    var level: Int = 1
-    var badges: [String] = []
-    var streak: Int = 0
-    var lastLoggedDate: Date?
+class UserProfile: ObservableObject { // 👈 Fix: Conform to ObservableObject
+    @Published var dailyGoal: Double = 2000.0
+    @Published var measurementUnit: String = "ml"
+    @Published var xp: Int = 0
+    @Published var level: Int = 1
+    @Published var badges: [String] = []
+    @Published var streak: Int = 0 // 👈 Fix: Now properly linked to ViewModel
+    @Published var lastLoggedDate: Date?
     
     func addXP(amount: Int) {
-        let bonusMultiplier = streak >= 7 ? 2 : 1 // Double XP for 7+ day streaks
+        let bonusMultiplier = streak >= 7 ? 2 : 1
         xp += amount * bonusMultiplier
         if xp >= level * 100 {
             xp = 0

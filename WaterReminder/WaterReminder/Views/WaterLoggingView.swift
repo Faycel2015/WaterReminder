@@ -33,7 +33,7 @@ struct WaterLoggingView: View {
                 .padding()
             
             Picker("Select Bottle", selection: $selectedBottle) {
-                ForEach(bottleOptions, id: \ .self) { bottle in
+                ForEach(bottleOptions, id: \.self) { bottle in
                     Text(bottle).tag(bottle)
                 }
             }
@@ -41,7 +41,7 @@ struct WaterLoggingView: View {
             .padding()
             
             Picker("Select Temperature", selection: $waterTemperature) {
-                ForEach(temperatureOptions, id: \ .self) { temp in
+                ForEach(temperatureOptions, id: \.self) { temp in
                     Text(temp).tag(temp)
                 }
             }
@@ -65,36 +65,37 @@ struct WaterLoggingView: View {
                         }
                     )
                 
-                
                 ZStack {
                     SpriteView(scene: WaterScene(), options: [.allowsTransparency])
                         .frame(width: 150, height: 300)
                         .cornerRadius(25)
-                if showRippleEffect {
-                    Circle()
-                        .stroke(Color.blue.opacity(0.5), lineWidth: 3)
-                        .frame(width: 80, height: 80)
-                        .scaleEffect(1.5)
-                        .opacity(0)
-                        .animation(Animation.easeOut(duration: 1).repeatCount(1, autoreverses: false), value: showRippleEffect)
+                    if showRippleEffect {
+                        Circle()
+                            .stroke(Color.blue.opacity(0.5), lineWidth: 3)
+                            .frame(width: 80, height: 80)
+                            .scaleEffect(1.5)
+                            .opacity(0)
+                            .animation(Animation.easeOut(duration: 1).repeatCount(1, autoreverses: false), value: showRippleEffect)
+                    }
                 }
+                .padding()
+                
+                Button("+250ml") {
+                    logWater(amount: 0.125)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+                
+                Button("+500ml") {
+                    logWater(amount: 0.25)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
             }
-            .padding()
-            
-            Button("+250ml") {
-                logWater(amount: 0.125) // 250ml is 12.5% of a 2L goal
-            }
-            .buttonStyle(.borderedProminent)
-            .padding()
-            
-            Button("+500ml") {
-                logWater(amount: 0.25)
-            }
-            .buttonStyle(.borderedProminent)
-            .padding()
         }
     }
     
+    // ✅ Move functions **outside the body**
     func logWater(amount: CGFloat) {
         fillAmount = min(fillAmount + amount, 1.0)
         playPouringSound()
